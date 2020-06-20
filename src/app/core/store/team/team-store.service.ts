@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
-import { Team } from 'src/app/shared/models/team/team';
+import { Team } from '../../../shared/models/team/team';
 
 export type teamByIdentifierCallback = (team: Team, index: number) => void;
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChampionshipStoreService {
+export class TeamStoreService {
   private _teams: BehaviorSubject<Team[]> = new BehaviorSubject(null);
   teams$ = this._teams.asObservable();
 
