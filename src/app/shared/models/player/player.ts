@@ -1,11 +1,19 @@
 import { LanePosition } from './lane-position.enum';
 
+
+export interface RequestablePlayer {
+    id?: number;
+    name: string;
+    position: LanePosition;
+}
+
 export interface IPlayer {
     id?: number;
     name: string;
     position: LanePosition;
 
     fullTextIncludes(text: string): boolean;
+    toRequestablePlayer(): RequestablePlayer;
 }
 
 export interface Player {
@@ -56,5 +64,15 @@ export class Player implements IPlayer {
         return nameCheck || positionCheck;
     }
 
+    toRequestablePlayer() {
+        const {id = undefined, name, position} = this;
 
+        console.log(id);
+
+        return {
+            id,
+            name,
+            position
+        };
+    }
 }

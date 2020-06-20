@@ -1,11 +1,18 @@
 import { Player } from '../player/player';
 
+export interface RequestableTeam {
+    id?: number;
+    name: string;
+    players: Player[];
+}
+
 export interface ITeam {
     id?: number;
     name: string;
     players: Player[];
 
     fullTextSearch(text: string): boolean;
+    toRequestableTeam(): RequestableTeam;
 }
 
 export interface Team {
@@ -58,5 +65,15 @@ export class Team implements ITeam {
         }, false);
 
         return nameCheck || playersCheck;
+    }
+
+    toRequestableTeam() {
+        const {id = undefined, name, players} = this;
+
+        return {
+            id,
+            name,
+            players
+        };
     }
 }
