@@ -14,5 +14,26 @@
       </mat-form-field>
     </div>
 
+    <div class="col-6 col-md-6">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-select formControlName="idBanco" placeholder="Lista de Bancos">
+          <mat-option>
+            <ngx-mat-select-search
+            ngModel
+            (ngModelChange)="stringFilterBanco = $event"
+            placeholderLabel="Buscar Banco..."
+            [formControl]="idBancoFilter"
+            noEntriesFoundLabel="'Nenhum Banco encontrado'"></ngx-mat-select-search>
+          </mat-option>
+          <mat-option
+          *ngFor="let banco of bancoList | filterNgxMultiselect : stringFilterBanco"
+          [value]="banco.value"
+          [matTooltip]="banco.key">
+          {{banco.key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
   
   </form>

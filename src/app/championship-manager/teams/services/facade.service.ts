@@ -2,43 +2,70 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { TeamStoreService } from '../../../core/store';
+import { TeamStoreService, PlayerStoreService } from '../../../core/store';
 import { Team } from '../../../shared/models/team/team';
 import { HttpService as TeamHttpService } from './http.service';
+import { Player } from '../../../shared/models/player/player';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacadeService {
-  isFetching = false;
+  isFetchingTeams = false;
+  isFetchingPlayers = false;
 
-  constructor(private _teamStoreService: TeamStoreService, private _teamsHttpService: TeamHttpService) { }
+  constructor(
+    private _teamStoreService: TeamStoreService,
+    private _playerStoreService: PlayerStoreService,
+    private _teamsHttpService: TeamHttpService
+  ) { }
 
   get teams(): Team[] {
     if (!this._teamStoreService.teams) {
-
+      this.fetchTeams();
     }
+
     return this._teamStoreService.teams;
   }
 
   get teams$(): Observable<Team[]> {
+    if (!this._teamStoreService.teams) {
+      this.fetchTeams();
+    }
+
     return this._teamStoreService.teams$;
   }
 
-  fetchTeams() {
-    if (!this.isFetching) {
-      this. isFetching = true;
+  get players(): Player[] {
+    if (!this._playerStoreService.players) {
+      this.fetchPlayers();
+    }
 
-      this._teamsHttpService.getTeams().subscribe(
+    return this._playerStoreService.players;
+  }
+
+  get players$(): Observable<Player[]> {
+    if (!this._playerStoreService.players) {
+      this.fetchPlayers();
+    }
+
+    return this._playerStoreService.players$;
+  }
+
+  fetchTeams(fullTextSearch?: string) {
+    if (!this.isFetchingTeams) {
+      this. isFetchingTeams = true;
+
+      this._teamsHttpService.getTeams(fullTextSearch).subscribe(
         teams => {
           this._teamStoreService.teams = teams;
         },
         err => {
           alert("Couldn't fetch teams");
-          this.isFetching = false;
+          this.isFetchingTeams = false;
         },
         () => {
-          this.isFetching = false;
+          this.isFetchingTeams = false;
         });
 
     }
@@ -96,5 +123,27 @@ export class FacadeService {
       }
     );
 
+  }
+
+  /* Players */
+
+  fetchPlayers(fullTextSearch?: string) {
+    if (!this.isFetchingPlayers) {
+      this.isFetchingPlayers = true;
+
+      this._teamsHttpService.getPlayers(fullTextSearch).subscribe(
+        playersReturned => {
+          this._playerStoreService.players = playersReturned;
+        },
+        err => {
+          alert("Couldn't fetch players");
+
+          this.isFetchingPlayers = false;
+        },
+        () => {
+          this.isFetchingPlayers = false;
+        }
+      );
+    }
   }
 }
