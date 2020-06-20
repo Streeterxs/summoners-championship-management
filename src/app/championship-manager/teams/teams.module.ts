@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { TeamsComponent } from './teams.component';
 import { TeamsRoutingModule } from './teams-routing.module';
@@ -13,7 +15,9 @@ import { TeamCreationModule } from './team-creation/team-creation.module';
     CommonModule,
     TeamsRoutingModule,
     TeamListModule,
-    TeamCreationModule
+    TeamCreationModule,
+    RouterModule,
+    MatTabsModule
   ]
 })
 export class TeamsModule { }

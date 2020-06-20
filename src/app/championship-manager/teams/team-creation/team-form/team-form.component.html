@@ -1,1 +1,18 @@
-<p>team-form works!</p>
+<form [formGroup]="conciliacaoValoresFechamentoForm" (ngSubmit)="formSubmit()">
+      
+    <div class="col-lg-6 col-md-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="taxa">
+      </mat-form-field>
+    </div>
+  
+    <div class="col-lg-12 col-md-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Players</mat-label>
+        <input type="text" matInput formControlName="percentualComissaoAntecipado">
+      </mat-form-field>
+    </div>
+
+  
+  </form>

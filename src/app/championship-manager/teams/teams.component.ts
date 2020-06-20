@@ -7,6 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamsComponent implements OnInit {
 
+  navLinks = [
+    {
+      path: 'list',
+      label: 'Team List'
+    },
+    {
+      path: 'creation',
+      label: 'Team Creation'
+    }
+  ];
   constructor() { }
 
   ngOnInit(): void {
