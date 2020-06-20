@@ -45,6 +45,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# json-server
+# environments variables
+environments/environment
+environments/environment.prod
 
+# json-server
 db.json
