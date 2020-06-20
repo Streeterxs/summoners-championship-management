@@ -4,7 +4,7 @@ import TeamService from '../services';
 import { Team } from '../../../shared/models/team/team';
 
 @Component({
-  selector: 'app-team-list',
+  selector: 'app-scm-team-list',
   templateUrl: './team-list.component.html',
   styleUrls: ['./team-list.component.scss']
 })
