@@ -46,8 +46,7 @@ testem.log
 Thumbs.db
 
 # environments variables
-environment
-environment.prod
+environments
 
 # json-server
 db.json
