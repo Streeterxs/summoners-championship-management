@@ -22,7 +22,15 @@ export class ChampionshipStoreService {
     this._teams.next(newTeamList);
   }
 
-  addNewTeam(team: Team) {
+  addNewTeam(team: Team, index?: number) {
+
+    if (index) {
+      this.teams.splice(index, 0, team);
+      this.teams = this.teams;
+
+      return;
+    }
+
     this._teams.next([team].concat(this.teams));
   }
 
@@ -48,5 +56,15 @@ export class ChampionshipStoreService {
       this.teams.splice(index, 1);
       this.teams = this.teams;
     });
+  }
+
+  removeFirstTeam() {
+    this.teams.splice(0, 1);
+    this.teams = this.teams;
+  }
+
+  removeLastTeam() {
+    this.teams.splice(this.teams.length - 1, 1);
+    this.teams = this.teams;
   }
 }
