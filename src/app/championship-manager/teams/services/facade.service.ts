@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { ChampionshipStoreService } from '../../../core/store/championship-store.service';
+import { TeamStoreService } from '../../../core/store';
 import { Team } from '../../../shared/models/team/team';
 import { HttpService as TeamHttpService } from './http.service';
 
@@ -12,17 +12,17 @@ import { HttpService as TeamHttpService } from './http.service';
 export class FacadeService {
   isFetching = false;
 
-  constructor(private _championshipStore: ChampionshipStoreService, private _teamsHttpService: TeamHttpService) { }
+  constructor(private _teamStoreService: TeamStoreService, private _teamsHttpService: TeamHttpService) { }
 
   get teams(): Team[] {
-    if (!this._championshipStore.teams) {
+    if (!this._teamStoreService.teams) {
 
     }
-    return this._championshipStore.teams;
+    return this._teamStoreService.teams;
   }
 
   get teams$(): Observable<Team[]> {
-    return this._championshipStore.teams$;
+    return this._teamStoreService.teams$;
   }
 
   fetchTeams() {
@@ -31,7 +31,7 @@ export class FacadeService {
 
       this._teamsHttpService.getTeams().subscribe(
         teams => {
-          this._championshipStore.teams = teams;
+          this._teamStoreService.teams = teams;
         },
         err => {
           alert("Couldn't fetch teams");
@@ -45,33 +45,33 @@ export class FacadeService {
   }
 
   addNewTeam(team: Team) {
-    this._championshipStore.addNewTeam(team);
+    this._teamStoreService.addNewTeam(team);
 
     this._teamsHttpService.postTeam(team).subscribe(
       (teamCreated) => {
-        this._championshipStore.removeFirstTeam();
+        this._teamStoreService.removeFirstTeam();
         this.addNewTeam(teamCreated);
       },
       err => {
         alert("Couldn't post team");
-        this._championshipStore.removeFirstTeam();
+        this._teamStoreService.removeFirstTeam();
       }
     );
 
   }
 
   updateTeam(team: Team) {
-    const teamBefore = {...this._championshipStore.teamByIdentifier(team.id)};
+    const teamBefore = {...this._teamStoreService.teamByIdentifier(team.id)} as Team;
 
-    this._championshipStore.updateTeam(team);
+    this._teamStoreService.updateTeam(team);
 
     this._teamsHttpService.updateTeam(team).subscribe(
       teamReturned => {
-        this._championshipStore.updateTeam(teamReturned);
+        this._teamStoreService.updateTeam(teamReturned);
       },
       err => {
         alert("Couldn't update team");
-        this._championshipStore.updateTeam(teamBefore);
+        this._teamStoreService.updateTeam(teamBefore);
       }
     );
 
@@ -81,18 +81,18 @@ export class FacadeService {
     let teamDeleted;
     let teamDeletedIndex;
 
-    this._championshipStore.teamByIdentifier(teamId, (teamFinded, index) => {
+    this._teamStoreService.teamByIdentifier(teamId, (teamFinded, index) => {
       teamDeleted = {...teamFinded};
       teamDeletedIndex = index;
     });
 
-    this._championshipStore.removeTeam(teamId);
+    this._teamStoreService.removeTeam(teamId);
 
     this._teamsHttpService.delete(teamId).subscribe(
       () => {},
       err => {
         alert("Couldn't delete team");
-        this._championshipStore.addNewTeam(teamDeleted, teamDeletedIndex);
+        this._teamStoreService.addNewTeam(teamDeleted, teamDeletedIndex);
       }
     );
 
