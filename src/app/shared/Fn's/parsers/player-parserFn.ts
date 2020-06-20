@@ -3,7 +3,7 @@ import { Player, IPlayer } from '../../models/player/player';
 type playerParserFn = (player: IPlayer) => Player;
 export const playerParser: playerParserFn = (player) => {
     return new Player(
-        player.name,
+        player.nickname,
         player.position,
         player.id
     );

@@ -3,13 +3,13 @@ import { LanePosition } from './lane-position.enum';
 
 export interface RequestablePlayer {
     id?: number;
-    name: string;
+    nickname: string;
     position: LanePosition;
 }
 
 export interface IPlayer {
     id?: number;
-    name: string;
+    nickname: string;
     position: LanePosition;
 
     fullTextIncludes(text: string): boolean;
@@ -18,21 +18,21 @@ export interface IPlayer {
 
 export interface Player {
     _id?: number;
-    _name: string;
+    _nickname: string;
     _position: LanePosition;
 }
 
 export class Player implements IPlayer {
 
-    constructor(name: string, position: LanePosition, id?: number) {
-        this._name = name;
+    constructor(nickname: string, position: LanePosition, id?: number) {
+        this._nickname = nickname;
         this._position = position;
 
         if (id) {
             this._id = id;
         }
 
-        console.log(this._name);
+        console.log(this._nickname);
         console.log(this._position);
     }
 
@@ -43,11 +43,11 @@ export class Player implements IPlayer {
         this._id = newId;
     }
 
-    get name() {
-        return this._name;
+    get nickname() {
+        return this._nickname;
     }
-    set name(newName: string) {
-        this._name = newName;
+    set nickname(newnickname: string) {
+        this._nickname = newnickname;
     }
 
     get position() {
@@ -58,20 +58,20 @@ export class Player implements IPlayer {
     }
 
     fullTextIncludes(text: string) {
-        const nameCheck = this.name.trim().toLocaleLowerCase().includes(text.trim().toLocaleLowerCase());
+        const nicknameCheck = this.nickname.trim().toLocaleLowerCase().includes(text.trim().toLocaleLowerCase());
         const positionCheck = this.position.trim().toLocaleLowerCase().includes(text.trim().toLocaleLowerCase());
 
-        return nameCheck || positionCheck;
+        return nicknameCheck || positionCheck;
     }
 
     toRequestablePlayer() {
-        const {id = undefined, name, position} = this;
+        const {id = undefined, nickname, position} = this;
 
         console.log(id);
 
         return {
             id,
-            name,
+            nickname,
             position
         };
     }
