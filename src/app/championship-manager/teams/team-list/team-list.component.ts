@@ -10,7 +10,7 @@ import { Team } from '../../../shared/models/team/team';
 })
 export class TeamListComponent implements OnInit {
 
-  private teamList: Team[];
+  teamList: Team[];
 
   constructor(
     private _teamService: TeamService

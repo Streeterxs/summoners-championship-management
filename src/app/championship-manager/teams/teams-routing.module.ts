@@ -3,16 +3,27 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamCreationComponent } from './team-creation/team-creation.component';
+import { TeamsComponent } from './teams.component';
 
 
 const routes: Routes = [
     {
-        path: 'list',
-        component: TeamListComponent
-    },
-    {
-        path: 'creation',
-        component: TeamCreationComponent
+        path: '',
+        component: TeamsComponent,
+        children: [
+            {
+                path: 'list',
+                component: TeamListComponent
+            },
+            {
+                path: 'creation',
+                component: TeamCreationComponent
+            },
+            {
+                path: '',
+                redirectTo: 'list'
+            }
+        ]
     }
 ];
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 
 import { TeamListComponent } from './team-list.component';
+import { TeamModule } from './team/team.module';
 
 
 
@@ -12,7 +13,8 @@ import { TeamListComponent } from './team-list.component';
   ],
   imports: [
     CommonModule,
-    MatListModule
+    MatListModule,
+    TeamModule
   ],
   exports: [
     TeamListComponent
