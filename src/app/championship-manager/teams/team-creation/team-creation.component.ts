@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-team-creation',
+  selector: 'app-scm-team-creation',
   templateUrl: './team-creation.component.html',
   styleUrls: ['./team-creation.component.scss']
 })
