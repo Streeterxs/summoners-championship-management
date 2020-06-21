@@ -101,13 +101,13 @@ export class FacadeService {
 
     this._teamsHttpService.postTeam(team).pipe(debounceTime(500)).subscribe(
       (teamCreated) => {
-        this._teamStoreService.removeFirstTeam();
+        this._teamStoreService.removeLastTeam();
         this._teamStoreService.addNewTeam(teamCreated);
       },
       err => {
         console.log(err);
         alert("Couldn't post team");
-        this._teamStoreService.removeFirstTeam();
+        this._teamStoreService.removeLastTeam();
       }
     );
 
