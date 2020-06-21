@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ManagerComponent } from './manager.component';
 import { ManagerRoutingModule } from './manager-routing.module';
+import { TournamentCreationModule } from './tournament-creation/tournament-creation.module';
 
 
 
@@ -10,7 +11,8 @@ import { ManagerRoutingModule } from './manager-routing.module';
   declarations: [ManagerComponent],
   imports: [
     CommonModule,
-    ManagerRoutingModule
+    ManagerRoutingModule,
+    TournamentCreationModule
   ]
 })
 export class ManagerModule { }
