@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~9.1.11",
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
+    "bootstrap": "^4.5.0",
     "json-server": "^0.16.1",
     "ngx-mat-select-search": "^3.0.0",
     "node-fetch": "^2.6.0",
