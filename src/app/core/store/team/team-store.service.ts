@@ -31,7 +31,7 @@ export class TeamStoreService {
       return;
     }
 
-    this._teams.next([{...team} as Team].concat(this.teams));
+    this._teams.next(this.teams.concat(team));
   }
 
   teamByIdentifier(id: number, callback?: teamByIdentifierCallback) {

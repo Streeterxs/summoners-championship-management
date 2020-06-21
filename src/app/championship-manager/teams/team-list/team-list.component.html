@@ -1,6 +1,8 @@
 <div class="display-flex align-center justify-center">
   <div class="width-60 pady-2">
+
     <h2>List</h2>
+    <app-scm-team-filter (filterChange)="optimisticFilter($event)" (filterDebouncedChange)="filterTeams($event)" class="mb-5"></app-scm-team-filter>
 
     <mat-list role="list">
       <mat-list-item role="listitem" *ngFor="let team of teamList">
@@ -12,5 +14,6 @@
         </div>
       </mat-list-item>
     </mat-list>
+
   </div>
 </div>

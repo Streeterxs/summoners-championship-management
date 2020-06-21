@@ -7,6 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { TeamListComponent } from './team-list.component';
 import { ConfirmationDialogModule } from '../../../shared/components';
+import { TeamFilterModule } from './team-filter/team-filter.module';
 
 
 
@@ -19,7 +20,8 @@ import { ConfirmationDialogModule } from '../../../shared/components';
     MatListModule,
     MatIconModule,
     ConfirmationDialogModule,
-    MatDialogModule
+    MatDialogModule,
+    TeamFilterModule
   ],
   exports: [
     TeamListComponent

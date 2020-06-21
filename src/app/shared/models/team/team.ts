@@ -22,19 +22,15 @@ export interface Team {
 }
 
 export class Team implements ITeam {
+
     constructor(name: string, players: Player[], id?: number) {
 
-        console.log(this._name);
-        console.log(this._players);
         this._name = name;
         this._players = players;
 
         if (id) {
             this._id = id;
         }
-
-        console.log(this._name);
-        console.log(this._players);
     }
 
     get id() {
@@ -64,6 +60,8 @@ export class Team implements ITeam {
             return acc || curr.fullTextIncludes(text);
         }, false);
 
+        console.log('nameCheck: ', nameCheck);
+        console.log('playersCheck: ', playersCheck);
         return nameCheck || playersCheck;
     }
 

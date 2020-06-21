@@ -22,6 +22,7 @@ export class TeamListComponent implements OnInit {
 
   ngOnInit(): void {
     this._teamService.teams$.subscribe(teams => {
+      console.log('team changed: ', teams);
       this.teamList = teams;
     });
   }
@@ -31,7 +32,6 @@ export class TeamListComponent implements OnInit {
   }
 
   deleteTeam(team: Team) {
-    console.log('team to delete: ', team);
     const configs: MatDialogConfig = {
       width: '70%'
     };
@@ -40,6 +40,15 @@ export class TeamListComponent implements OnInit {
         this._teamService.deleteTeam(team.id);
       }
     });
+  }
+
+  optimisticFilter(textToSearch: string) {
+    this._teamService.fullTextStringToFilter.next(textToSearch);
+  }
+
+  filterTeams(textToSearch: string) {
+    console.log('textToSearch: ', textToSearch);
+    this._teamService.filterTeams(textToSearch);
   }
 
 }

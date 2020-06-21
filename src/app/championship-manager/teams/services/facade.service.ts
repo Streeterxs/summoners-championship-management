@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 import { TeamStoreService, PlayerStoreService } from '../../../core/store';
 import { Team, RequestableTeam } from '../../../shared/models/team/team';
@@ -15,6 +16,9 @@ export class FacadeService {
   isFetchingTeams = false;
   isFetchingPlayers = false;
 
+  fullTextStringToFilter = new BehaviorSubject<string>('');
+  debouncedEvent = new BehaviorSubject<void>(null).pipe(debounceTime(400));
+
   constructor(
     private _teamStoreService: TeamStoreService,
     private _playerStoreService: PlayerStoreService,
@@ -26,7 +30,7 @@ export class FacadeService {
       this.fetchTeams();
     }
 
-    return this._teamStoreService.teams;
+    return this._teamStoreService.teams?.filter(team => team.fullTextSearch(this.fullTextStringToFilter.value));
   }
 
   get teams$(): Observable<Team[]> {
@@ -34,7 +38,15 @@ export class FacadeService {
       this.fetchTeams();
     }
 
-    return this._teamStoreService.teams$;
+    return combineLatest([
+        this._teamStoreService.teams$,
+        this.fullTextStringToFilter.asObservable()
+      ])
+        .pipe(
+          map(
+            combinedValues => combinedValues[0]?.filter(team => team.fullTextSearch(combinedValues[1]))
+          )
+        );
   }
 
   get players(): Player[] {
@@ -53,11 +65,11 @@ export class FacadeService {
     return this._playerStoreService.players$;
   }
 
-  fetchTeams(fullTextSearch?: string) {
+  fetchTeams() {
     if (!this.isFetchingTeams) {
       this. isFetchingTeams = true;
 
-      this._teamsHttpService.getTeams(fullTextSearch).subscribe(
+      this._teamsHttpService.getTeams().pipe(debounceTime(500)).subscribe(
         teams => {
           this._teamStoreService.teams = teams;
         },
@@ -72,14 +84,23 @@ export class FacadeService {
     }
   }
 
+  filterTeams(textToSearch: string) {
+    this._teamsHttpService.getTeams(textToSearch).pipe(debounceTime(500)).subscribe(
+      teams => {
+        this._teamStoreService.teams = teams;
+      },
+      err => {
+        alert("Couldn't fetch teams");
+      });
+  }
+
   addNewTeam(team: RequestableTeam) {
     const {name, players} = team;
 
     this._teamStoreService.addNewTeam(new Team(name, players.map(player => playerParser(player))));
 
-    this._teamsHttpService.postTeam(team).subscribe(
+    this._teamsHttpService.postTeam(team).pipe(debounceTime(500)).subscribe(
       (teamCreated) => {
-        console.log('returned post team creation');
         this._teamStoreService.removeFirstTeam();
         this._teamStoreService.addNewTeam(teamCreated);
       },
@@ -97,7 +118,7 @@ export class FacadeService {
 
     this._teamStoreService.updateTeam(team);
 
-    this._teamsHttpService.updateTeam(team).subscribe(
+    this._teamsHttpService.updateTeam(team).pipe(debounceTime(500)).subscribe(
       teamReturned => {
         this._teamStoreService.updateTeam(teamReturned);
       },
@@ -120,7 +141,7 @@ export class FacadeService {
 
     this._teamStoreService.removeTeam(teamId);
 
-    this._teamsHttpService.delete(teamId).subscribe(
+    this._teamsHttpService.delete(teamId).pipe(debounceTime(400)).subscribe(
       () => {},
       err => {
         alert("Couldn't delete team");
@@ -136,7 +157,7 @@ export class FacadeService {
     if (!this.isFetchingPlayers) {
       this.isFetchingPlayers = true;
 
-      this._teamsHttpService.getPlayers(fullTextSearch).subscribe(
+      this._teamsHttpService.getPlayers(fullTextSearch).pipe(debounceTime(500)).subscribe(
         playersReturned => {
           this._playerStoreService.players = playersReturned;
         },
