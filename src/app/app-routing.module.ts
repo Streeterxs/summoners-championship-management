@@ -9,6 +9,11 @@ const routes: Routes = [
       {
         path: 'summoners-championship',
         loadChildren: () => import('./championship-manager/championship-manager.module').then(m => m.ChampionshipManagerModule)
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/summoners-championship'
       }
     ]
   }

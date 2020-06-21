@@ -1,5 +1,10 @@
 <mat-toolbar color="primary" class="mat-elevation-z4">  
   <mat-toolbar-row>
-    <span>Summoners Championship</span>
+    <button mat-flat-button color="primary" (click)="navigateTo([''])" class="cursor-pointer">
+      <h1>
+        Summoners Championship
+      </h1>
+    </button>
+    <button mat-flat-button value="teams" color="primary" (click)="navigateTo(['summoners-championship', 'teams'])" class="cursor-pointer">Teams</button>
   </mat-toolbar-row>
 </mat-toolbar>
