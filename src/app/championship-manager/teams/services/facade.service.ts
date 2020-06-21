@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { TeamStoreService, PlayerStoreService } from '../../../core/store';
-import { Team } from '../../../shared/models/team/team';
+import { Team, RequestableTeam } from '../../../shared/models/team/team';
 import { HttpService as TeamHttpService } from './http.service';
 import { Player } from '../../../shared/models/player/player';
+import { playerParser } from 'src/app/shared/Fn\'s/parsers/player-parserFn';
 
 @Injectable({
   providedIn: 'root'
@@ -71,15 +72,19 @@ export class FacadeService {
     }
   }
 
-  addNewTeam(team: Team) {
-    this._teamStoreService.addNewTeam(team);
+  addNewTeam(team: RequestableTeam) {
+    const {name, players} = team;
+
+    this._teamStoreService.addNewTeam(new Team(name, players.map(player => playerParser(player))));
 
     this._teamsHttpService.postTeam(team).subscribe(
       (teamCreated) => {
+        console.log('returned post team creation');
         this._teamStoreService.removeFirstTeam();
-        this.addNewTeam(teamCreated);
+        this._teamStoreService.addNewTeam(teamCreated);
       },
       err => {
+        console.log(err);
         alert("Couldn't post team");
         this._teamStoreService.removeFirstTeam();
       }

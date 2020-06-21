@@ -1,9 +1,9 @@
-import { Player } from '../player/player';
+import { Player, RequestablePlayer } from '../player/player';
 
 export interface RequestableTeam {
     id?: number;
     name: string;
-    players: Player[];
+    players: RequestablePlayer[];
 }
 
 export interface ITeam {

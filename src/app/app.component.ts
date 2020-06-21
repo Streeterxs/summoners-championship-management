@@ -6,10 +6,6 @@ import { environment } from 'src/environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'summoners-championship-manager';
-
-  ngOnInit() {
-    console.log('apiurl: ', environment.API_URL);
-  }
 }

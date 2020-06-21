@@ -31,9 +31,6 @@ export class Player implements IPlayer {
         if (id) {
             this._id = id;
         }
-
-        console.log(this._nickname);
-        console.log(this._position);
     }
 
     get id() {

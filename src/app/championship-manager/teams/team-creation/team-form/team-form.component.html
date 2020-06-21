@@ -16,7 +16,6 @@
                 <mat-select formControlName="players" class="w-100" placeholder="Players List" multiple>
                   <mat-option>
                     <ngx-mat-select-search
-                    ngModel
                     (ngModelChange)="stringFilterPlayers = $event"
                     placeholderLabel="Search Player..."
                     [formControl]="playerFilter"
@@ -32,6 +31,7 @@
               </mat-form-field>
             </div>
             <div class="display-flex align-center justify-end w-100">
+                <button mat-raised-button color="primary" class="mx-2" type="button" (click)="clearForm()">Clear Form</button>
                 <button mat-raised-button color="primary">Submit</button>
             </div>
         </div>

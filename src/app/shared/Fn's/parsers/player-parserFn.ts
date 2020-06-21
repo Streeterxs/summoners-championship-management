@@ -1,6 +1,6 @@
-import { Player, IPlayer } from '../../models/player/player';
+import { Player, RequestablePlayer } from '../../models/player/player';
 
-type playerParserFn = (player: IPlayer) => Player;
+type playerParserFn = (player: RequestablePlayer) => Player;
 export const playerParser: playerParserFn = (player) => {
     return new Player(
         player.nickname,
@@ -9,7 +9,7 @@ export const playerParser: playerParserFn = (player) => {
     );
 };
 
-type playerListParserFn = (playerList: IPlayer[]) => Player[];
+type playerListParserFn = (playerList: RequestablePlayer[]) => Player[];
 export const playerListParser: playerListParserFn = (playerList) => {
     return playerList.map(player => playerParser(player));
 };
