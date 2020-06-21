@@ -17,7 +17,6 @@ export class FacadeService {
   isFetchingPlayers = false;
 
   fullTextStringToFilter = new BehaviorSubject<string>('');
-  debouncedEvent = new BehaviorSubject<void>(null).pipe(debounceTime(400));
 
   constructor(
     private _teamStoreService: TeamStoreService,
