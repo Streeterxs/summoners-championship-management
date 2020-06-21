@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { TeamListComponent } from './team-list.component';
-import { TeamModule } from './team/team.module';
+import { ConfirmationDialogModule } from '../../../shared/components';
 
 
 
@@ -14,7 +17,9 @@ import { TeamModule } from './team/team.module';
   imports: [
     CommonModule,
     MatListModule,
-    TeamModule
+    MatIconModule,
+    ConfirmationDialogModule,
+    MatDialogModule
   ],
   exports: [
     TeamListComponent

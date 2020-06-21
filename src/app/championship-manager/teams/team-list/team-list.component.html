@@ -1,5 +1,16 @@
-<mat-list role="list">
-  <mat-list-item role="listitem" *ngFor="let team of teamList">
-      <app-scm-team [team]="team"></app-scm-team>
-  </mat-list-item>
-</mat-list>
+<div class="display-flex align-center justify-center">
+  <div class="width-60 pady-2">
+    <h2>List</h2>
+
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let team of teamList">
+        <!-- <app-scm-team [team]="team"></app-scm-team> -->
+        <mat-icon color="accent" mat-list-icon class="team-list__icon" (click)="editTeam(team)">edit</mat-icon>
+        <mat-icon color="warn" mat-list-icon class="team-list__icon" (click)="deleteTeam(team)">delete</mat-icon>
+        <div mat-line>
+            {{team?.name}}
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
