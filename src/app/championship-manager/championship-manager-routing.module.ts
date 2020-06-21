@@ -4,12 +4,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'manager',
     loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule)
   },
   {
     path: 'teams',
     loadChildren: () => import('./teams/teams.module').then(m => m.TeamsModule)
+  },
+  {
+    path: '',
+    redirectTo: 'manager'
+  },
+  {
+    path: '**',
+    redirectTo: 'manager'
   }
 ];
 

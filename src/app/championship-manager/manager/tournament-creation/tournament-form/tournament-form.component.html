@@ -2,7 +2,7 @@
     <div class="display-flex align-center justify-center">
         <div class="row align-center w-50">
 
-            <h2>Team Form</h2>
+            <h2>Championship Form</h2>
 
             <div class="col-12">
               <mat-form-field class="w-100">
@@ -14,7 +14,16 @@
             <div class="col-12">
               <mat-form-field class="w-100">
                 <mat-label>Team Quantity</mat-label>
-                <input #teamNumber type="text" class="w-100" matInput formControlName="teamNumber">
+                <mat-select
+                  (selectionChange)="tournamentForm?.get('teams').reset()"
+                  class="w-100"
+                  formControlName="teamNumber">
+                  <mat-option [value]="2">2</mat-option>
+                  <mat-option [value]="4">4</mat-option>
+                  <mat-option [value]="8">8</mat-option>
+                  <mat-option [value]="16">16</mat-option>
+                  <mat-option [value]="32">32</mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
         

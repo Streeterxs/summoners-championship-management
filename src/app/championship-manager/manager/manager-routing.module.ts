@@ -17,6 +17,10 @@ const routes: Routes = [
           {
             path: '',
             redirectTo: 'creation'
+          },
+          {
+            path: '**',
+            redirectTo: 'creation'
           }
         ]
     }

@@ -13,7 +13,12 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/summoners-championship'
+        redirectTo: 'summoners-championship'
+      },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: 'summoners-championship'
       }
     ]
   }
