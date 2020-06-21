@@ -15,13 +15,10 @@ export interface ITeam {
     toRequestableTeam(): RequestableTeam;
 }
 
-export interface Team {
-    _id?: number;
-    _name: string;
-    _players: Player[];
-}
-
 export class Team implements ITeam {
+    private _id?: number;
+    private _name: string;
+    private _players: Player[];
 
     constructor(name: string, players: Player[], id?: number) {
 
@@ -60,8 +57,6 @@ export class Team implements ITeam {
             return acc || curr.fullTextIncludes(text);
         }, false);
 
-        console.log('nameCheck: ', nameCheck);
-        console.log('playersCheck: ', playersCheck);
         return nameCheck || playersCheck;
     }
 
@@ -71,7 +66,7 @@ export class Team implements ITeam {
         return {
             id,
             name,
-            players
+            players: players.map(player => player.toRequestablePlayer())
         };
     }
 }

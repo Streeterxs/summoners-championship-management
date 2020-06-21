@@ -16,13 +16,10 @@ export interface IPlayer {
     toRequestablePlayer(): RequestablePlayer;
 }
 
-export interface Player {
-    _id?: number;
-    _nickname: string;
-    _position: LanePosition;
-}
-
 export class Player implements IPlayer {
+    private _id?: number;
+    private _nickname: string;
+    private _position: LanePosition;
 
     constructor(nickname: string, position: LanePosition, id?: number) {
         this._nickname = nickname;

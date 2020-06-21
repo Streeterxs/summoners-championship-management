@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 import TeamService from '../../services';
 import { NgxMultiselectArray } from '../../../../shared/pipes/filter-ngx-multiselect/filter-ngx-multiselect.pipe';
-import { RequestableTeam } from 'src/app/shared/models/team/team';
+import { RequestableTeam, Team } from '../../../../shared/models/team/team';
 
 @Component({
   selector: 'app-scm-team-form',
@@ -11,6 +11,9 @@ import { RequestableTeam } from 'src/app/shared/models/team/team';
   styleUrls: ['./team-form.component.scss']
 })
 export class TeamFormComponent implements OnInit {
+  @Input() teamToEdit?: Team;
+  @Input() showButtons?: boolean = true;
+
   teamForm: FormGroup;
 
   // NgxMultiselect data
@@ -20,6 +23,7 @@ export class TeamFormComponent implements OnInit {
 
   // Event Emitters
   @Output() formSubmitTriggered: EventEmitter<RequestableTeam> = new EventEmitter();
+  @Output() formEditTriggered: EventEmitter<Team> = new EventEmitter();
   constructor(private _teamService: TeamService, private _fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -29,17 +33,23 @@ export class TeamFormComponent implements OnInit {
       }
     });
 
-    this.teamForm = this.generateTeamForm();
+    this.teamForm = this.generateTeamForm(this.teamToEdit ? this.teamToEdit : undefined);
   }
 
-  generateTeamForm(): FormGroup {
+  generateTeamForm(teamToEdit?: Team): FormGroup {
     return this._fb.group({
-      name: [''],
-      players: [[]]
+      name: [teamToEdit ? teamToEdit.name : ''],
+      players: [teamToEdit ? teamToEdit.players.map(player => player.id) : []]
     });
   }
 
   formSubmit() {
+
+    if (this.teamToEdit) {
+      this.formEditSubmit();
+      return;
+    }
+
     const {name, players} = this.teamForm.value as {name: string, players: number[]};
 
     const teamRequestable: RequestableTeam = {
@@ -48,6 +58,17 @@ export class TeamFormComponent implements OnInit {
     };
 
     this.formSubmitTriggered.emit(teamRequestable);
+  }
+
+  formEditSubmit() {
+
+    const {name, players} = this.teamForm.value as {name: string, players: number[]};
+
+    this.teamToEdit.name = name;
+    this.teamToEdit.players = players.map(player => this._teamService.players.find(playerReturn => playerReturn.id === player));
+
+
+    this.formEditTriggered.emit(this.teamToEdit);
   }
 
   clearForm() {

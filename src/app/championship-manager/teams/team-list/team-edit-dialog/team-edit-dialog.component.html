@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>
+    Edit Team
+</h1>
+<div mat-dialog-content>
+    <div class="marx-1 mt-2 mb-3">
+        <app-scm-team-form
+            #teamForm
+            [showButtons]="false"
+            [teamToEdit]="team"
+            (formEditTriggered)="editTeam($event)"></app-scm-team-form>
+    </div>
+</div>
+<div mat-dialog-actions align="end" class="mt-1">
+    <button mat-flat-button color="accent" (click)="clearForm()">Clear Form</button>
+  <button mat-flat-button color="accent" (click)="cancel()">Cancel</button>
+  <button mat-flat-button color="warn" (click)="confirm()">Edit</button>
+</div>

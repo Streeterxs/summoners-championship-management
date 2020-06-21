@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import TeamService from '../services';
 import { Team } from '../../../shared/models/team/team';
 import { ConfirmationDialogComponent } from '../../../shared/components';
+import { TeamEditDialogComponent } from './team-edit-dialog/team-edit-dialog.component';
 
 @Component({
   selector: 'app-scm-team-list',
@@ -29,6 +30,18 @@ export class TeamListComponent implements OnInit {
 
   editTeam(team: Team) {
     console.log('team to edit: ', team);
+    const configs: MatDialogConfig = {
+      width: '70%',
+      disableClose: false,
+      autoFocus: false,
+      data: team
+    };
+
+    this._dialog.open(TeamEditDialogComponent, configs).afterClosed().subscribe(teamToRequest => {
+      if (teamToRequest) {
+        this._teamService.updateTeam(teamToRequest);
+      }
+    });
   }
 
   deleteTeam(team: Team) {

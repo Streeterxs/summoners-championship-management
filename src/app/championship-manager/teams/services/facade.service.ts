@@ -114,11 +114,11 @@ export class FacadeService {
   }
 
   updateTeam(team: Team) {
-    const teamBefore = {...this._teamStoreService.teamByIdentifier(team.id)} as Team;
+    const teamBefore = this._teamStoreService.teamByIdentifier(team.id) as Team;
 
     this._teamStoreService.updateTeam(team);
 
-    this._teamsHttpService.updateTeam(team).pipe(debounceTime(500)).subscribe(
+    this._teamsHttpService.updateTeam(team.toRequestableTeam()).pipe(debounceTime(500)).subscribe(
       teamReturned => {
         this._teamStoreService.updateTeam(teamReturned);
       },

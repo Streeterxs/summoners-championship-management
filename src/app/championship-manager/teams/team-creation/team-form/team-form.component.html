@@ -30,7 +30,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="display-flex align-center justify-end w-100">
+            <div *ngIf="showButtons" class="display-flex align-center justify-end w-100">
                 <button mat-raised-button color="primary" class="mx-2" type="button" (click)="clearForm()">Clear Form</button>
                 <button mat-raised-button color="primary">Submit</button>
             </div>
