@@ -1,7 +1,12 @@
 <div class="ngtt__match-wrapper">
   <ng-container *ngFor="let team of teams">
     <div class="ngtt__team-wrapper">
-        <h6 class="ngtt__team-title">{{team ? team.name : 'Waiting for winner'}}</h6>
+        <h6 class="ngtt__team-title cursor-pointer d-flex" (click)="clickedTeam(team)">
+          {{team ? team.name : 'Waiting for winner'}} 
+          <span class="ml-auto d-flex">
+            <mat-icon *ngIf="team && match?.winner?.id === team?.id">grade</mat-icon>
+          </span>
+        </h6>
     </div>
   </ng-container>
 </div>

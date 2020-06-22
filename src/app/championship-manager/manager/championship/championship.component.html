@@ -1,7 +1,8 @@
 <div class="tree__wrapper">
+    <h1>{{championship?.name}}</h1>
     <ngtt-single-elimination-tree [tournament]="singleEliminationTournament" [matchTemplate]="matchTemplate"></ngtt-single-elimination-tree>
 </div>
 
 <ng-template #matchTemplate let-match>
-  <app-scm-match [match]="match"></app-scm-match>
+  <app-scm-match (teamClick)="pickWinner($event)" [match]="match"></app-scm-match>
 </ng-template>

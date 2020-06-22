@@ -52,6 +52,12 @@ export class Round {
         this._winner = newWinner;
     }
 
+    idToTeam1OrTeam2OrWinner(id: number) {
+        if (this.team1 && this.team1.id === id) { return 'team1'; }
+        if (this.team2 && this.team2.id === id) { return 'team2'; }
+        if (this.winner && this.winner.id === id) { return 'winner'; }
+    }
+
     toRequestable(): RequestableRound {
         const {id, team1, team2, winner, nextRound} = this;
 

@@ -1,11 +1,11 @@
-@import '~ng-tournament-tree/styles/ngtt-variables';
+@import '../../../../../my-tree.scss';
 
 .ngtt__match-wrapper {
   display: flex;
   flex-direction: column;
   width: $ngtt-match-wrapper-width;
   height: $ngtt-match-wrapper-height;
-  background-color: lighten($ngtt-background-primary, 15%);
+  background-color: $ngtt-background-secondary;
   border-radius: 6px;
 }
 
@@ -27,4 +27,8 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 import { MatchComponent } from './match.component';
 
@@ -10,7 +11,8 @@ import { MatchComponent } from './match.component';
     MatchComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   exports: [
     MatchComponent
