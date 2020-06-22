@@ -21,6 +21,8 @@ Create a typescript file named environment.ts. There is too a environment-exampl
 This project is a MVP and the focus was to create a Championship Management tool. I developed it to be scalable, in order to create a new team you need to select a Player list from the Store Service but no player management is added to the project, so you need to run the Populate script.
 
 #### Don't Forget!
-`Create your environment.ts file in environments folder`
-`Create your db.json file based on db-example.json`
-`npm run server THEN npm run populate`
+`Create your environment.ts file in environments folder`;
+
+`Create your db.json file based on db-example.json`;
+
+`npm run server THEN npm run populate`;
