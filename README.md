@@ -1,27 +1,26 @@
-# SummonersChampionshipManager
+## Summoners Championship Manager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+This project focus on a management of a Championship/Tournament. You can add, update and delete teams and make a championship with them .
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Simply `npm i` or `yarn install`;
 
-## Code scaffolding
+## Running
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Json-server
 
-## Build
+This project has a self json-server to persist and mock data. You need to create a file named db.json based on the db.example.json (with same object properties) and run `npm run server`. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Environment Variables
 
-## Running unit tests
+Create a typescript file named environment.ts. There is too a environment-example.ts that you could take as basis to create yours. 'production' property is type boolean, `don't forget it`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Scripts
 
-## Running end-to-end tests
+This project is a MVP and the focus was to create a Championship Management tool. I developed it to be scalable, in order to create a new team you need to select a Player list from the Store Service but no player management is added to the project, so you need to run the Populate script.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+#### Don't Forget!
+`Create your environment.ts file in environments folder`
+`Create your db.json file based on db-example.json`
+`npm run server THEN npm run populate`
