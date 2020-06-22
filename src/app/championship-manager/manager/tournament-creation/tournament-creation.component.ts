@@ -32,6 +32,7 @@ export class TournamentCreationComponent implements OnInit {
     const phases = generateRounds();
 
     this._managerService.championship = new Championship(name, phases);
+
     this._router.navigate(['../brackets'], {relativeTo: this._activatedRoute});
   }
 

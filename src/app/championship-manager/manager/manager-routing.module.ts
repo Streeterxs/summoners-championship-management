@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ManagerComponent } from './manager.component';
 import { TournamentCreationComponent } from './tournament-creation/tournament-creation.component';
 import { ChampionshipComponent } from './championship/championship.component';
+import { ChampionshipGuard } from '../../core/services/championship.guard';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
           },
           {
             path: 'brackets',
-            component: ChampionshipComponent
+            component: ChampionshipComponent,
+            canActivate: [ChampionshipGuard]
           },
           {
             path: '',
