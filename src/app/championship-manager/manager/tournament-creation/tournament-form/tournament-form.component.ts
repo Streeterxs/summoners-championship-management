@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 import { NgxMultiselectArray } from '../../../../shared/pipes/filter-ngx-multiselect/filter-ngx-multiselect.pipe';
 import TeamService from '../../../teams/services';
 
+
+export type TournamentFormValue = {
+  name: string;
+  teams: number[];
+  teamNumber: number;
+}
 @Component({
   selector: 'app-scm-tournament-form',
   templateUrl: './tournament-form.component.html',
@@ -17,6 +23,7 @@ export class TournamentFormComponent implements OnInit {
   teamFilter = new FormControl();
   teamListFormated: NgxMultiselectArray = [];
 
+  @Output() formSubmitted: EventEmitter<TournamentFormValue> = new EventEmitter();
   constructor(private _fb: FormBuilder, private _teamService: TeamService) { }
 
   ngOnInit(): void {
@@ -39,6 +46,11 @@ export class TournamentFormComponent implements OnInit {
 
   formSubmit() {
     console.log(this.tournamentForm.value);
+    const {name, teams, teamNumber} = this.tournamentForm.value as TournamentFormValue;
+
+    this.formSubmitted.emit({
+      name, teams, teamNumber
+    });
   }
 
   clearForm() {

@@ -1,20 +1,21 @@
 import { Team, RequestableTeam } from '../team/team';
 
 export interface RequestableRound {
-    nextRound: number;
     id?: number;
     team1?: RequestableTeam;
     team2?: RequestableTeam;
     winner?: RequestableTeam;
+    nextRound?: number;
 }
 
 export class Round {
     constructor(
-        private _nextRound: number,
         private _id?: number,
         private _team1?: Team,
         private _team2?: Team,
-        private _winner?: Team) {}
+        private _winner?: Team,
+        private _nextRound?: number
+    ) {}
 
     get nextRound() {
         return this._nextRound;
