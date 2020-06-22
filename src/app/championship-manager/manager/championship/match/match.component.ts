@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Round } from '../../../../shared/models/round/round';
 import { Team } from '../../../../shared/models/team/team';
@@ -13,7 +13,7 @@ export type TeamClickEvent = {
   templateUrl: './match.component.html',
   styleUrls: ['./match.component.scss']
 })
-export class MatchComponent implements OnInit {
+export class MatchComponent implements OnInit, OnChanges {
   @Input() match: Round;
 
   teams: Team[] = [];
@@ -25,6 +25,10 @@ export class MatchComponent implements OnInit {
     console.log('this match: ', this.match);
 
     this.teams = [this.match.team1, this.match.team2];
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
   clickedTeam(team: Team) {

@@ -1,6 +1,6 @@
-<div class="tree__wrapper">
+<div class="tree__wrapper" *ngIf="singleEliminationTournament?.rounds?.length > 0">
     <h1>{{championship?.name}}</h1>
-    <ngtt-single-elimination-tree [tournament]="singleEliminationTournament" [matchTemplate]="matchTemplate"></ngtt-single-elimination-tree>
+    <ngtt-single-elimination-tree #tournamentTree [tournament]="singleEliminationTournament" [matchTemplate]="matchTemplate"></ngtt-single-elimination-tree>
 </div>
 
 <ng-template #matchTemplate let-match>

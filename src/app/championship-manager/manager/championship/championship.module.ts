@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NgTournamentTreeModule } from 'ng-tournament-tree';
 
 import { ChampionshipComponent } from './championship.component';
 import { MatchModule } from './match/match.module';
+import { NgTournamentTreeModule } from '../../../shared/components/championship-tree/ng-tournament-tree.module';
 
 
 

@@ -1,0 +1,15 @@
+<div class="ngtt-se__container">
+  <div class="ngtt-se__bracket-wrapper">
+    <ng-container *ngFor="let rounds of bracket; let i = index">
+      <div class="ngtt-se__round-wrapper">
+        <ng-container *ngFor="let match of rounds?.matches">
+          <div class="ngtt-se__match-wrapper">
+            <div class="ngtt-se__match-component-container">
+              <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: match ? match : null}"></ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>
