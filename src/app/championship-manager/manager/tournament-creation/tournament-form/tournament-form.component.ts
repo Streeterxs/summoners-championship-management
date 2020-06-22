@@ -48,9 +48,11 @@ export class TournamentFormComponent implements OnInit {
     console.log(this.tournamentForm.value);
     const {name, teams, teamNumber} = this.tournamentForm.value as TournamentFormValue;
 
-    this.formSubmitted.emit({
-      name, teams, teamNumber
-    });
+    if (teamNumber === teams.length) {
+      this.formSubmitted.emit({
+        name, teams, teamNumber
+      });
+    }
   }
 
   clearForm() {

@@ -31,7 +31,6 @@
               <mat-form-field class="full-width w-100">
                 <mat-select
                   formControlName="teams"
-                  [disabled]="tournamentForm?.get('teams')?.value?.length >= tournamentForm?.get('teamNumber')?.value || !tournamentForm?.get('teamNumber')?.value"
                   class="w-100"
                   placeholder="Team List"
                   multiple>
@@ -54,7 +53,10 @@
 
             <div class="display-flex align-center justify-end w-100">
                 <button mat-raised-button color="primary" class="mx-2" type="button" (click)="clearForm()">Clear Form</button>
-                <button mat-raised-button color="primary">Submit</button>
+                <button 
+                [disabled]="tournamentForm?.get('teams')?.value?.length !== tournamentForm?.get('teamNumber')?.value || !tournamentForm?.get('teamNumber')?.value || !tournamentForm?.get('name')?.value"
+                mat-raised-button
+                color="primary">Submit</button>
             </div>
         </div>
     </div>
