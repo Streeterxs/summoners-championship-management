@@ -1,0 +1,7 @@
+<div class="tree__wrapper">
+    <ngtt-single-elimination-tree [tournament]="singleEliminationTournament" [matchTemplate]="matchTemplate"></ngtt-single-elimination-tree>
+</div>
+
+<ng-template #matchTemplate let-match>
+  <app-scm-match [match]="match"></app-scm-match>
+</ng-template>

@@ -1,5 +1,8 @@
 import { Round, RequestableRound } from '../round/round';
 
+
+export type Phases = Round[][];
+
 export interface RequestableChampionship {
     id?: number;
     name: string;
@@ -9,7 +12,7 @@ export interface RequestableChampionship {
 export class Championship {
     constructor(
         private _name: string,
-        private _rounds: Round[],
+        private _phases: Phases,
         private _id?: number
     ) {}
 
@@ -20,11 +23,11 @@ export class Championship {
         this._name = newName;
     }
 
-    get rounds() {
-        return this._rounds;
+    get phases() {
+        return this._phases;
     }
-    set rounds(newRounds) {
-        this._rounds = newRounds;
+    set phases(newPhases) {
+        this._phases = newPhases;
     }
 
     get id() {
@@ -35,11 +38,11 @@ export class Championship {
     }
 
     toRequestable() {
-        const {name, rounds, id} = this;
+        const {name, phases, id} = this;
         return {
             id,
             name,
-            rounds: rounds.map(round => round.toRequestable())
+            phases: phases.map(phase => phase.map(round => round.toRequestable()))
         };
     }
 }

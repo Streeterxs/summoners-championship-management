@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ManagerComponent } from './manager.component';
 import { TournamentCreationComponent } from './tournament-creation/tournament-creation.component';
+import { ChampionshipComponent } from './championship/championship.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
           {
             path: 'creation',
             component: TournamentCreationComponent
+          },
+          {
+            path: 'brackets',
+            component: ChampionshipComponent
           },
           {
             path: '',

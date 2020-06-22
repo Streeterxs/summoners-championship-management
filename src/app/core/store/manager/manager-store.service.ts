@@ -15,6 +15,9 @@ export class ManagerStoreService {
   private _championships: BehaviorSubject<Championship[]> = new BehaviorSubject(null);
   championships$ = this._championships.asObservable();
 
+  private _championship: BehaviorSubject<Championship> = new BehaviorSubject(null);
+  championship$ = this._championship.asObservable();
+
   constructor() { }
 
   get championships() {
@@ -22,6 +25,13 @@ export class ManagerStoreService {
   }
   set championships(newChampionships: Championship[]) {
     this._championships.next(newChampionships);
+  }
+
+  get championship() {
+    return this._championship.value;
+  }
+  set championship(newChampionship: Championship) {
+    this._championship.next(newChampionship);
   }
 
   addNewChampionship(Championship: Championship, index?: number) {

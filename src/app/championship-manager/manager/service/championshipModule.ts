@@ -1,5 +1,6 @@
 import { Team } from '../../../shared/models/team/team';
 import { Round } from '../../../shared/models/round/round';
+import { Phases } from '../../../shared/models/championship/championship';
 
 type PairTeams = [
     Team,
@@ -10,6 +11,7 @@ type PairRounds = [
     Round,
     Round
 ][];
+
 const championshipModule = (teams: Team[]) => {
 
     const shuffledTeams = shuffleTeams(teams);
@@ -27,11 +29,12 @@ const championshipModule = (teams: Team[]) => {
         });
 
         for (let index = rounds.length; index >= 1; index = index === 1 ? index - 1 : index / 2) {
-            console.log('index: ', index);
             totalRounds = totalRounds + index;
         }
 
-        console.log('totalRounds: ', totalRounds);
+        let phases: Phases = [].concat([rounds]);
+
+        console.log('initial phases: ', phases);
 
         const pairRounds: PairRounds = [];
         const baseRoundsCopy = rounds;
@@ -48,12 +51,13 @@ const championshipModule = (teams: Team[]) => {
                 return newRound;
             });
 
-            console.log('next phase rounds: ', nextPhaseRounds);
+            phases = phases.concat([nextPhaseRounds]);
 
             rounds = rounds.concat(nextPhaseRounds);
         }
 
-        console.log('rounds: ', rounds);
+        console.log('final phases: ', phases);
+        return phases;
     };
 
     return generateRounds;
